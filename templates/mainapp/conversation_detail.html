@@ -1,0 +1,37 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}Conversation Details{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">Conversation Details</h2>
+
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="row mb-2">
+                    <div class="col-4"><strong>Name:</strong></div>
+                    <div class="col-8">{{ conversation.name }}</div>
+                </div> 
+                <div class="row mb-2">
+                    <div class="col-4"><strong>Created At:</strong></div>
+                    <div class="col-8">{{ conversation.created_at }}</div>
+                </div> 
+                <div class="row mb-2">
+                    <div class="col-4"><strong>Updated At:</strong></div>
+                    <div class="col-8">{{ conversation.updated_at }}</div>
+                </div> 
+                <div class="row mb-2">
+                    <div class="col-4"><strong>User:</strong></div>
+                    <div class="col-8">{{ conversation.user }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <a href="{% url 'conversation_update' conversation.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'conversation_delete' conversation.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'conversation_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+    {% endblock %}

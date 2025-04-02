@@ -1,0 +1,29 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}NoteLabel Details{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">NoteLabel Details</h2>
+
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="row mb-2">
+                    <div class="col-4"><strong>Note:</strong></div>
+                    <div class="col-8">{{ notelabel.note }}</div>
+                </div> 
+                <div class="row mb-2">
+                    <div class="col-4"><strong>Label:</strong></div>
+                    <div class="col-8">{{ notelabel.label }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <a href="{% url 'notelabel_update' notelabel.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'notelabel_delete' notelabel.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'notelabel_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+    {% endblock %}

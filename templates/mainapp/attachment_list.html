@@ -1,0 +1,36 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}Attachment List{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">Attachment List</h2>
+
+        <a href="{% url 'attachment_create' %}" class="btn btn-primary mb-3">Create New Attachment</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>File</th> <th>Message</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for attachment in attachment_list %}
+                <tr>
+                    <td>{{ attachment.file }}</td> <td>{{ attachment.message }}</td>
+                    <td>
+                        <a href="{% url 'attachment_detail' attachment.id %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'attachment_update' attachment.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'attachment_delete' attachment.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="1">No attachments found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

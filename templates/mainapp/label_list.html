@@ -1,0 +1,36 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}Label List{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">Label List</h2>
+
+        <a href="{% url 'label_create' %}" class="btn btn-primary mb-3">Create New Label</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th> <th>User</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for label in label_list %}
+                <tr>
+                    <td>{{ label.name }}</td> <td>{{ label.user }}</td>
+                    <td>
+                        <a href="{% url 'label_detail' label.id %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'label_update' label.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'label_delete' label.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="1">No labels found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

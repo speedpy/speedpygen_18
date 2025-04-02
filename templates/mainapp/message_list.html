@@ -1,0 +1,36 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}Message List{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">Message List</h2>
+
+        <a href="{% url 'message_create' %}" class="btn btn-primary mb-3">Create New Message</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Content</th> <th>Created At</th> <th>Conversation</th> <th>User</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in message_list %}
+                <tr>
+                    <td>{{ message.content }}</td> <td>{{ message.created_at }}</td> <td>{{ message.conversation }}</td> <td>{{ message.user }}</td>
+                    <td>
+                        <a href="{% url 'message_detail' message.id %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'message_update' message.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'message_delete' message.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No messages found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

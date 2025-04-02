@@ -1,0 +1,36 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}Conversation List{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">Conversation List</h2>
+
+        <a href="{% url 'conversation_create' %}" class="btn btn-primary mb-3">Create New Conversation</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th> <th>Created At</th> <th>Updated At</th> <th>User</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for conversation in conversation_list %}
+                <tr>
+                    <td>{{ conversation.name }}</td> <td>{{ conversation.created_at }}</td> <td>{{ conversation.updated_at }}</td> <td>{{ conversation.user }}</td>
+                    <td>
+                        <a href="{% url 'conversation_detail' conversation.id %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'conversation_update' conversation.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'conversation_delete' conversation.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No conversations found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

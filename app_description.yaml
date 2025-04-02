@@ -1,0 +1,84 @@
+models:
+  - name: Note
+    fields:
+      - name: title
+        type: CharField
+        required: true
+      - name: content
+        type: TextField
+        required: true
+      - name: created_at
+        type: DateTimeField
+        required: true
+        default: auto_now_add=True
+      - name: updated_at
+        type: DateTimeField
+        required: true
+        default: auto_now=True
+      - name: user
+        type: ForeignKey
+        required: true
+        to: User
+  - name: Conversation
+    fields:
+      - name: name
+        type: CharField
+        required: true
+      - name: created_at
+        type: DateTimeField
+        required: true
+        default: auto_now_add=True
+      - name: updated_at
+        type: DateTimeField
+        required: true
+        default: auto_now=True
+      - name: user
+        type: ForeignKey
+        required: true
+        to: User
+  - name: Message
+    fields:
+      - name: content
+        type: TextField
+        required: true
+      - name: created_at
+        type: DateTimeField
+        required: true
+        default: auto_now_add=True
+      - name: conversation
+        type: ForeignKey
+        required: true
+        to: Conversation
+      - name: user
+        type: ForeignKey
+        required: true
+        to: User
+  - name: Attachment
+    fields:
+      - name: file
+        type: FileField
+        required: true
+      - name: message
+        type: ForeignKey
+        required: true
+        to: Message
+  - name: Label
+    fields:
+      - name: name
+        type: CharField
+        required: true
+        is_unique: true
+      - name: user
+        type: ForeignKey
+        required: true
+        to: User
+  - name: NoteLabel
+    fields:
+      - name: note
+        type: ForeignKey
+        required: true
+        to: Note
+      - name: label
+        type: ForeignKey
+        required: true
+        to: Label

@@ -1,0 +1,36 @@
+{% extends "mainapp/layouts/sidebar_layout.html" %}
+
+    {% block head_title %}NoteLabel List{% endblock %}
+
+    {% block main_content %}
+    <div class="container">
+        <h2 class="h2">NoteLabel List</h2>
+
+        <a href="{% url 'notelabel_create' %}" class="btn btn-primary mb-3">Create New NoteLabel</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Note</th> <th>Label</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notelabel in notelabel_list %}
+                <tr>
+                    <td>{{ notelabel.note }}</td> <td>{{ notelabel.label }}</td>
+                    <td>
+                        <a href="{% url 'notelabel_detail' notelabel.id %}" class="btn btn-info btn-sm">View</a>
+                        <a href="{% url 'notelabel_update' notelabel.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'notelabel_delete' notelabel.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="1">No notelabels found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
